@@ -20,4 +20,4 @@ Example run(On a Linux OS):
 python3 trajectory_generation.py
 ```
 
-This should rewrite the ouptut_trajcetories.csv and be ready for use in Coppelia Sim.
+This will rewrite the ouptut_trajcetories.csv and be ready for use in Coppelia Sim.
