@@ -19,12 +19,12 @@ def Next_State(current_config, controls, dt, angular_range):
     
     controls = np.clip(controls, -angular_range, angular_range)
     
-    x = current_config[0]
-    y = current_config[1]
-    phi = current_config[2]
+    phi = current_config[0]
+    x = current_config[1]
+    y = current_config[2]
     
     m = np.array([[-1/(l+w), 1/(l+w), 1/(l+w), -1/(l+w)],
-                    [1, 1 ,1 ,1],
+                    [1, 1, 1 ,1],
                     [-1, 1, -1, 1]])
     
     V_b = (r / 4) * m @ np.array([current_config[8], current_config[9], current_config[10], current_config[11]])
@@ -41,9 +41,10 @@ def Next_State(current_config, controls, dt, angular_range):
     Tsbk1 = Tsb @ mr.MatrixExp6(V_b6)
     
     #Update Odometry
-    new_config[0] = Tsbk1[0][3]
-    new_config[1] = Tsbk1[1][3]
-    new_config[2] = np.arccos(Tsbk1[0][0])
+    new_config[0] = np.arccos(Tsbk1[0][0])
+    new_config[1] = Tsbk1[0][3]
+    new_config[2] = Tsbk1[1][3]
+    
     
     #Update Arm Angles
     for i in range(5): #Number of joints for arm
