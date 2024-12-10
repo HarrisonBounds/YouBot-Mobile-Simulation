@@ -30,6 +30,11 @@ Tce_standoff = np.array([[0, 0, 1, 0],
                          [-1, 0, 0, 0.1],
                          [0, 0, 0, 1]])
 
+T_angle = np.array([[np.cos(np.pi/3), 0, np.sin(np.pi/3), 0],
+                    [0, 1, 0, 0],
+                    [-np.sin(np.pi/3), 0, np.cos(np.pi/3), 0],
+                    [0, 0, 0, 1]])
+
 B1 = np.array([0, 0, 1, 0, 0.033, 0])
 B2 = np.array([0, -1, 0, -0.5076, 0, 0])
 B3 = np.array([0, -1, 0, -0.3526, 0, 0])
@@ -120,7 +125,7 @@ x_errs = []
 output_trajectories = []
 
 
-output_trajectories, gripper_state_list = Trajectory_Generation(Tse_initial, Tsc_initial, Tsc_final, Tce_grasp, Tce_standoff, k=1, gripper_state=False)
+output_trajectories, gripper_state_list = Trajectory_Generation(Tse_initial, Tsc_initial, Tsc_final, Tce_grasp @ T_angle, Tce_standoff @ T_angle, k=1, gripper_state=False)
 # print("output trajectories: ", output_trajectories)
 
 for i in range(len(output_trajectories) - 1):
